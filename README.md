@@ -9,10 +9,10 @@
     <li>
       <a href="#about-the-project">About The Project</a>
        <ul>
-        <li><a href="#built-with">Background</a></li>
+        <li><a href="#Background">Background</a></li>
       </ul>
       <ul>
-        <li><a href="#built-with">Motivation</a></li>
+        <li><a href="#Motivations">Motivation</a></li>
       </ul>
       <ul>
         <li><a href="#built-with">Built With</a></li>
@@ -28,18 +28,26 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
+## About the Project 
 
-#Background 
+### Background 
 What is the L5PC Neuron -- 2/3 of the mammilian cortex critical for cogniitive processing 
 
 Purpose -- many computational models use HH to represent a L5PC neuron -- is this accurate? can we optimize stimulation of such neuron to get desired activity while decreasing cost on tissues? -- dementia applicatoins 
 
-#Computational Methods
+### Motivations
 
+### Built With 
 
-Final Project for computational physics.
+## Getting Started 
+###Prerequisites
+### Installation 
+
+##Usage
+
+##Roadmap
+
+## Acknowledgments
