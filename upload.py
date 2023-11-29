@@ -1,15 +1,11 @@
-import warnings 
-import zipfile
-import numpy as np
-import pandas as pd
-
-class recovery_file:
+class retrieve_file:
     def __init__(self, neuron_type= 'L5PC', num_ap = 1, V_data = None, I_data = None, t_data = None ):
         self.neuron = neuron_type
         self.num_ap = num_ap
         self.V_data  = V_data
         self.I_data = I_data
         self.t_data = t_data
+        
     def load(self):
         if self.neuron == 'L5PC':
             if self.num_ap >= 2:
@@ -59,3 +55,4 @@ class recovery_file:
         else:
             raise Exception("Sorry this is not a valid choice of neuron model for this problem, please choose HH, L5PC, or manually insert your data ")
             pass #raise warning here to input valid input
+        return
