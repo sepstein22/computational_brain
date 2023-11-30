@@ -1,3 +1,9 @@
+import os
+import sys
+import zipfile 
+import pandas as pd
+import warnings 
+
 class retrieve_file:
     def __init__(self, neuron_type= 'L5PC', num_ap = 1, V_data = None, I_data = None, t_data = None ):
         self.neuron = neuron_type
@@ -55,4 +61,3 @@ class retrieve_file:
         else:
             raise Exception("Sorry this is not a valid choice of neuron model for this problem, please choose HH, L5PC, or manually insert your data ")
             pass #raise warning here to input valid input
-        return
