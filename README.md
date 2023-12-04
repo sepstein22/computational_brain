@@ -39,7 +39,11 @@
 
 What is the L5PC Neuron -- 2/3 of the mammilian cortex critical for cogniitive processing 
 
-Purpose -- many computational models use HH to represent a L5PC neuron -- is this accurate? can we optimize stimulation of such neuron to get desired activity while decreasing cost on tissues? -- dementia applicatoins 
+Purpose -- many computational models use HH to represent a L5PC neuron -- is this accurate? can we optimize stimulation of such neuron to get desired activity while decreasing cost on tissues? -- dementia applications 
+
+Adjoint Explanation:
+Define the nonlinear system $V(t+1) = \mathbf{F}(V(t))$ where $t \in [0, T]$ and $\mathbf{F}$ is an operator that solves the Hodgkin-Huxley system of ODEs using the forward Euler method.  
+The Hodgkin-Huxley (H-H) landmark model is described by a system of four nonlinear differential equations that describes how action potentials in neurons are initiated and propagated
 
 ### Motivation
 
