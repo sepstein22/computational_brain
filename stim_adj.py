@@ -140,10 +140,10 @@ class stim_adj:
     def optimize(self):
         '''impliments minimization problem with respect to desired parameters'''
         grad_AD = grad(self.__cost, 0)
-        if bounds == []
+        if bounds == []:
             optim = optimize.minimize(self.__cost, self.I_params_init, args = (self.m, self.n, self.h), jac = grad_AD, method = self.method)
         else: 
-             optim = optimize.minimize(self.__cost, self.I_params_init, args = (self.m, self.n, self.h), jac = grad_AD, bounds, method = self.method)
+             optim = optimize.minimize(self.__cost, self.I_params_init, args = (self.m, self.n, self.h), jac = grad_AD, bounds = self.bounds, method = self.method)
         return optim
    
     def recovery(self):
