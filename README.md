@@ -73,7 +73,14 @@ While this project presents a fundamental assessment of this problem, further ex
    ```sh
    pip install -r requirements.txt
    ```
-3. Running Files: 
+3. Create an instance of the parent class:
+   ```sh
+   python3
+   from param_test import ParameterRecovery
+   ```
+4. Call the method:
+   '''
+   '''
 
 ## Usage
 
