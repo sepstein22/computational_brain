@@ -54,3 +54,8 @@ Purpose -- many computational models use HH to represent a L5PC neuron -- is thi
 ## Roadmap
 
 ## Acknowledgments
+
+## Requirements 
+README contains Installation instructions
+README contains example usage and minimum working example
+
