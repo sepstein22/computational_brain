@@ -60,6 +60,9 @@ While this project presents a fundamental assessment of this problem, further ex
 
 ### Installation 
 
+1. Clone the repo:
+git clone 
+
 ## Usage
 
 ## Roadmap
