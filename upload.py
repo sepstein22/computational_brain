@@ -61,3 +61,4 @@ class retrieve_file:
         else:
             raise Exception("Sorry this is not a valid choice of neuron model for this problem, please choose HH, L5PC, or manually insert your data ")
             pass #raise warning here to input valid input
+        return self.V_data, self.I_data, self.t_data, self.V0, self.dt
