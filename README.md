@@ -65,7 +65,11 @@ While this project presents a fundamental assessment of this problem, further ex
    ```sh
    git clone [https://github.com/your_username_/Project-Name.git](https://github.com/sepstein22/cphy_final.git)
    ```
-2. Install Packages:
+2. Go into the Directory:
+   ```sh
+   cd cphy_final
+   ```
+4. Install Dependencies:
    ```sh
    pip install -r requirements.txt
    ```
@@ -76,6 +80,8 @@ While this project presents a fundamental assessment of this problem, further ex
 ## Roadmap
 
 ## Acknowledgments
+
+This uses the following open source packages: 
 
 ## Requirements 
 README contains Installation instructions
