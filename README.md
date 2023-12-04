@@ -61,7 +61,9 @@ While this project presents a fundamental assessment of this problem, further ex
 ### Installation 
 
 1. Clone the repo:
-git clone 
+   ```sh
+   git clone https://github.com/your_username_/Project-Name.git
+   ```
 
 ## Usage
 
