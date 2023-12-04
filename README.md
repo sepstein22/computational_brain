@@ -85,7 +85,34 @@ While this project presents a fundamental assessment of this problem, further ex
 ## Usage
 There are four key files in this repo. 
 
-'''upload.py'''
+`upload.py`: loads data 
+`stim_adj.py` : class to impliment the forward model, cost method, adjoint method, and optimization when we are seeking to recover parameters of the Impulse wave {`a`: amplitude, `c`: frequency, `b`: center } assuming a guassian waveform
+`param_adj.py` : class to impliment the adjoint method when forward model, cost method, adjoint method, and optimization when we are seeking to recover the parameters of the Hodgkin Huxley equation with a known impulse wave {`g_Na`: , `g_K`, `g_L`, `E_Na`, `E_K `, `E_L`, `C_m`, `m`, `n`, `h`}. It assumes all these values are unknown. If any of these values are loaded in as known in the `param_test` file (which will be explained below), it sets both the upper and lower bounds when implimenting optimization equal to this value, as well as the initial guess. 
+`param_test` : is the class the user interacts with. It calls the three files above. It takes in the following arguments: 
+  `known_params`: a dictionary of any known values in the problem.
+  `unknown_params`: a dictionary of all unknown values in the problem. 
+
+   It is assumed the parameters are given to be of the following form `['g_Na', 'g_K', 'g_L', 'E_Na', 'E_K', 'E_L', 'C_m', 'm', 'h', 'n', 'stim']`. If the user includes `'stim'` as an unknown all other values are assumed to be known, since we do not allow for the combination of impulse and parameter recovery.
+    `'dt'` : time step for simulation
+    `neuron_type`: This is used to retrieve file type due to our naming convention in `upload.py`. Type of data assumed to be one from list `['manual', 'L5PC', 'HH']`. 
+    `num_ap`: This is used to retrieve file type due to our naming convention in `upload.py`. 
+    `V_data`: Is not required, but takes in a np array if the user wants to specify manual data importation.
+      `I_data`: Is not required, but takes in a np array if the user wants to specify manual data importation.
+    `t_data`: Is not required, but takes in a np array if the user wants to specify manual data importation.
+    `method`: Specifies the optimization method that will be loaded into `stim_adj.py` or `param_adj.py`. 
+    `bounds`: Specifies a list of bounds. This will be updated for known values as well in the parameter optimization case. 
+    `tol`: Specifies the optimization tol to reduce runtime. 
+
+After defining parameters, this file is broken down into a few major functoins: 
+  1. `assign_parameters` acts as a test funciton to warn the user what parameters remained undefined and will be assumed to be of the standard Hodgkin Huxley Model.
+  2. `define_bounds`: defines upper and lower bounds for both problem types;.
+  3. `def_guess_params`: defines initial guesses based on known and unknown values.
+  4. `adj_impulse`: calls an instance of `stim_adj.py` and returns the final Voltage and the optimal value of the impulse parameters `[a, c, b]`.
+  5. `adj_params`: calls an instance of `param_adj.py` and returns the integrated for final Voltage and the optimal value of the HH parameters.
+  6. `optimize`: determines what type of problem we have and calls the sorrect `adj_` function
+  7. `graph`: plots the optimal solution.
+
+
 ## Roadmap
 
 ## Acknowledgments
