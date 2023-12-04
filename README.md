@@ -14,9 +14,6 @@
       <ul>
         <li><a href="#Motivations">Motivation</a></li>
       </ul>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -56,7 +53,6 @@ Note that on the equations of motion (i.e. when $V(t) = \mathbf{F}(V(t-1))$ ), d
 ### Motivation
 While this project presents a fundamental assessment of this problem, further expansions could play critical roles in disease treatments such as in dementia and epilepsy. 
 
-### Built With 
 
 ## Getting Started 
 
