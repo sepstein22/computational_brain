@@ -3,7 +3,7 @@ from autograd import grad
 from scipy import optimize
 
 class stim_adj: 
-    def __init__(self, V0, V_data, t_data, dt, HH_params, guess_a, guess_c, guess_b, bounds = [], method =  'CG'):
+    def __init__(self, V_data, t_data, dt, HH_params, guess_a, guess_c, guess_b, bounds = [], method =  'CG'):
         '''
         args:
             V0 (float): defined in upload.py to be initial voltage
@@ -25,7 +25,7 @@ class stim_adj:
         '''
         
         #variables from empiracle data
-        self.V0 = V0
+        self.V0 = V_data[0]
         self.V_data = V_data
         self.t_data = t_data
         self.t_final = t_data[-1]
@@ -145,3 +145,7 @@ class stim_adj:
         else: 
              optim = optimize.minimize(self.__cost, self.I_params_init, args = (self.m, self.n, self.h), jac = grad_AD, bounds, method = self.method)
         return optim
+   
+    def recovery(self):
+        recovered = self.integrate_HH(self.m, self.h, self.n, self.optimize().x)
+        return recovered
