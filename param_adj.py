@@ -104,7 +104,7 @@ class param_adj:
         optim = optimize.minimize(self.__cost, self.init_guess, args = (), jac = grad_AD, bounds = self.bounds, method = self.method, tol = self.tol)
         return optim
     
-    def recovery(self)
+    def recovery(self):
         optim = self.optimize().x
         V_final = self.integrate_HH(optim)
         return V_final, optim
