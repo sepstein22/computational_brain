@@ -79,3 +79,4 @@ While this project presents a fundamental assessment of this problem, further ex
 README contains Installation instructions
 README contains example usage and minimum working example
 
+## Tests
