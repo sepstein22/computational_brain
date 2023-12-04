@@ -66,8 +66,9 @@ While this project presents a fundamental assessment of this problem, further ex
    ```
 2. Install Packages:
    ```sh
-   
+   pip install -r requirements.txt
    ```
+3. Running Files: 
 
 ## Usage
 
