@@ -21,7 +21,6 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -117,8 +116,6 @@ After defining parameters, this file is broken down into a few major functoins:
 
 ### Tests
 
-
-## Roadmap
 
 ## Acknowledgments
 
