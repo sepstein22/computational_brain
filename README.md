@@ -91,10 +91,7 @@ There are four key files in this repo.
 - `param_test` : is the class the user interacts with. It calls the three files above. It takes in the following arguments: 
     - `known_params`: a dictionary of any known values in the problem.
     - `unknown_params`: a dictionary of all unknown values in the problem. 
-
-It is assumed the parameters are given to be of the following form `['g_Na', 'g_K', 'g_L', 'E_Na', 'E_K', 'E_L', 'C_m', 'm', 'h', 'n', 'stim']`. If the user includes `'stim'` as an unknown all other values are assumed to be known, since we do not allow for the combination of impulse and parameter recovery.
-
-    - `'dt'` : time step for simulation
+    - `dt` : time step for simulation
     - `neuron_type`: This is used to retrieve file type due to our naming convention in `upload.py`. Type of data assumed to be one from list `['manual', 'L5PC', 'HH']`. 
     - `num_ap`: This is used to retrieve file type due to our naming convention in `upload.py`. 
     - `V_data`: Is not required, but takes in a np array if the user wants to specify manual data importation.
@@ -103,6 +100,7 @@ It is assumed the parameters are given to be of the following form `['g_Na', 'g_
     - `method`: Specifies the optimization method that will be loaded into `stim_adj.py` or `param_adj.py`. 
     - `bounds`: Specifies a list of bounds. This will be updated for known values as well in the parameter optimization case. 
     - `tol`: Specifies the optimization tol to reduce runtime. 
+It is assumed the parameters are given to be of the following form `['g_Na', 'g_K', 'g_L', 'E_Na', 'E_K', 'E_L', 'C_m', 'm', 'h', 'n', 'stim']`. If the user includes `'stim'` as an unknown all other values are assumed to be known, since we do not allow for the combination of impulse and parameter recovery.
 
 After defining parameters, this file is broken down into a few major functoins: 
   1. `assign_parameters` acts as a test funciton to warn the user what parameters remained undefined and will be assumed to be of the standard Hodgkin Huxley Model.
