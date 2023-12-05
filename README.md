@@ -121,6 +121,8 @@ Prior to running the model we recommend the user runs some unit tests these incl
 ```assertEqual(len(self.V_data), len(self.t_data)) ```
 2. Finite Gradient check: 
 
+A sample plot looks like the following: 
+<img src = "https://github.com/sepstein22/cphy_final/blob/1c727b4ebcf6082ed42e2e9e5c10368ca4e3443d/images/finite_diff_grad.png" height = 300 width = 300>
 ## Acknowledgments
 
 This uses the following open source packages: 
