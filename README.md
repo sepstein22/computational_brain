@@ -42,7 +42,7 @@ This project is inspired by Boutet, A., Madhavan, R., Elias, G.J.B. et al. (2021
 A model of the L5PC neuron was adopted from  Hay, Etay, et al. (2011). Layer 5 (L5) neurons are the fundamental output layer of cortical structures and consist of 2/3 of the mammilian cortex. When characterizing behavior, neuroscientists largely attribute cognitive processings to occur in L5PC neurons. Our L5 consists of long-range projection pyramidal neurons signaling a columnar output to both cortical and extracortical regions of the brain. Recent literature, Moberg S, Takahashi N.  (2022), has suggested two subclasses morphologically distinct L5 neurons exists. These differences cause subsequent distinct electrophysiological properties. However, traditionally, computational models of neurons neglect these distinguishers. This leads to the question, can one use simplified computational models such as the Hodgkin Huxley to recovor more complex behaviors of the L5PC neuron. If so, is this accurate; and is it possible to optimize the computational model of such neuron to closely most fit the desired result, while maintaining biological feasibility?
 
 #### Hodgkin Huxley Model
-![alt text](images/HH.png)
+![alt text](https://github.com/sepstein22/cphy_final/blob/6eb8953b2cbfe5648ce6cbb59094ba43e5a0c3a1/images/HH.png)
 For implimentation, a Biophysical model (i.e., a Hodgkin-Huxley model) is used, based on: Izhikevich, Eugene M. Dynamical systems in neuroscience : the geometry of excitability and bursting. Cambridge, Mass. London: MIT Press, 2010, Chapter 8. The Hodgkin Huxley is a simplified conductance based model of a neuron's signal propegation. 
 
 
