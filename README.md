@@ -43,6 +43,7 @@ A model of the L5PC neuron was adopted from  Hay, Etay, et al. (2011). Layer 5 (
 
 #### Hodgkin Huxley Model
 ![alt text](https://github.com/sepstein22/cphy_final/blob/6eb8953b2cbfe5648ce6cbb59094ba43e5a0c3a1/images/HH.png)
+<img src = "https://github.com/sepstein22/cphy_final/blob/6eb8953b2cbfe5648ce6cbb59094ba43e5a0c3a1/images/HH.png" width = "200" height = "200">
 For implimentation, a Biophysical model (i.e., a Hodgkin-Huxley model) is used, based on: Izhikevich, Eugene M. Dynamical systems in neuroscience : the geometry of excitability and bursting. Cambridge, Mass. London: MIT Press, 2010, Chapter 8. The Hodgkin Huxley is a simplified conductance based model of a neuron's signal propegation. 
 
 
