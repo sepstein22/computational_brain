@@ -58,7 +58,7 @@ While this project presents a fundamental assessment of this problem, further ex
 ## Getting Started 
 
 ### Prerequisites
-The class implimentations have a more significant runtime due to variable storage and high runtime overhead. For proof of concept, we recommend looking at the JupyterNotebooks in `rough_drafts`. Additionally a class implimentatin has high method lookup overhead and overhead due to accessing global variables. Future directions would impliment further runtime analysis, and likely the reworking of classes into python scripts. We also recommend starting with `` for impulse recovery, due to the simpler code and faster runtime. 
+For proof of concept, we recommend looking at the JupyterNotebooks in `rough_drafts` and for sample implimentation of a class `stim_adj_test.ipynb`. The class implimentations have a more significant runtime due to variable storage and high runtime overhead. Additionally a class implimentatin has high method lookup overhead and overhead due to accessing global variables. Future directions would impliment further runtime analysis, and likely the reworking of classes into python scripts. We also recommend starting with `` for impulse recovery, due to the simpler code and faster runtime. 
 
 
 
