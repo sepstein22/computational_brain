@@ -93,6 +93,7 @@ There are four key files in this repo.
     - `unknown_params`: a dictionary of all unknown values in the problem. 
 
 It is assumed the parameters are given to be of the following form `['g_Na', 'g_K', 'g_L', 'E_Na', 'E_K', 'E_L', 'C_m', 'm', 'h', 'n', 'stim']`. If the user includes `'stim'` as an unknown all other values are assumed to be known, since we do not allow for the combination of impulse and parameter recovery.
+
     - `'dt'` : time step for simulation
     - `neuron_type`: This is used to retrieve file type due to our naming convention in `upload.py`. Type of data assumed to be one from list `['manual', 'L5PC', 'HH']`. 
     - `num_ap`: This is used to retrieve file type due to our naming convention in `upload.py`. 
