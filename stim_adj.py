@@ -1,6 +1,8 @@
 import autograd.numpy as np 
 from autograd import grad
 from scipy import optimize
+import matplotlib.pyplot as plt
+
 
 class stim_adj: 
     def __init__(self, V_data, t_data, dt, HH_params, guess_a, guess_c, bounds = [], method =  'BFGS'):
@@ -29,8 +31,6 @@ class stim_adj:
         self.V_data = V_data
         self.t_data = t_data
         self.t_final = t_data[-1]
-        #self.data_steps = data_steps
-        
         
         #user specified or default
         self.dt = dt 
@@ -98,11 +98,8 @@ class stim_adj:
             V_record (array): record of voltages for each time step
         '''
         V_record = np.zeros_like(self.t_sim)
-        V = self.V0
+        V, m, n, h = self.V0, self.m, self.n, self.h
         
-        m = self.m
-        n = self.n
-        h = self.h
         
         for i in range(len(self.t_sim)):
             V_record[i] = V
@@ -142,43 +139,88 @@ class stim_adj:
                   
         cost = cost/len(self.t_data)
 
-        return cost 
-    
-#         # print out at every iteration
-#     def callback(self, x):
-#         error = self.__cost(x, self.m, self.n, self.h)
-#         print(f"Iteration: {self.callback.iteration}, x: {x}, Cost: {error}")
-#         self.callback.iteration += 1
-
-#     def callbackF(Xi):
-#         global Nfeval
-#         print '{0:4d}   {1: 3.6f}   {2: 3.6f}   {3: 3.6f}   {4: 3.6f}'.format(Nfeval, Xi[0], Xi[1], self.__cost(Xi, self.m, self.n, self.h))
-#         Nfeval += 1
+        return cost
 
 
     def optimize(self):
         '''impliments minimization problem with respect to desired parameters'''
-        
-        # start callback
-        all_x_i = [self.I_params_init[0]]
-        all_y_i = [self.I_params_init[1]]
-        all_f_i = [self.__cost(self.I_params_init)]
-        def store(X):
-            x, y = X
-            all_x_i.append(x)
-            all_y_i.append(y)
-            all_f_i.append(self.__cost(X))
-        # end callback
             
         grad_AD = grad(self.__cost, 0)
         if self.bounds == []:
             optim = optimize.minimize(self.__cost, self.I_params_init, args = (), jac = grad_AD, method = self.method)
         else: 
             #self.callback.iteration = 0
-            optim = optimize.minimize(self.__cost, self.I_params_init, args = (), jac = grad_AD, bounds = self.bounds, callback = store, method = self.method) #options={'disp': True, 'maxiter':3})
+            optim = optimize.minimize(self.__cost, self.I_params_init, args = (), jac = grad_AD, bounds = self.bounds, method = self.method) #options={'disp': True, 'maxiter':3})
         return optim
    
     def recovery(self):
         X = self.optimize().x
         recovered = self.integrate_HH(X)
         return X, recovered
+    
+    
+    
+    
+    def fd_check(self, param_idx, verbose):
+        #a, c, param_idx, V0, m, h, n, dt, t, data_steps, V_data):
+
+        '''Make log-log plot of gradient finite difference error vs. step size
+        Args: 
+            param_idx (binary): 0 for FD check of gradient with respect to amplitude
+                                1 for FD check of gradient with respect to duration
+            verbose (binary): set equal to 1 to print out values of FD
+        '''
+    
+        step_sizes = [1e0, 1e-1, 1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-7, 1e-8, 1e-9, 1e-10, 1e-11, 1e-12, 1e-13]
+        p = np.random.randint(0,5000)
+
+        if param_idx == 0:
+            A1 = np.random.uniform(0,10)
+            I1 = np.array([A1, self.c_init])
+            title = 'Amplitude'
+
+        elif param_idx == 1:
+            c1 = np.random.uniform(0, 5)
+            I1 = np.array([self.a_init, c1])
+            title = 'Duration'
+
+        else:
+            msg = print('can only perform FD check for amplitude (idx = 0) or duration (idx = 1)')
+            return msg
+
+        L1 = self.__cost(I1)
+
+        # compute gradient using autograd
+        grad_AD = grad(self.__cost, 0)
+        g = grad_AD(I1)[param_idx]#, self.V0, self.m, self.h, self.n, self.dt, self.t_sim, self.t_data, self.V_data)[param_idx]
+        dL_dV_p = np.dot(g, p)
+
+        grad_errs = list()
+        for s in step_sizes:
+
+            # compute gradient using finite differences
+            if param_idx == 0:
+                A2 = A1 + s*p
+                I2 = np.array([A2, self.c_init])
+
+            elif param_idx == 1:
+                c2 = c1 + s*p
+                I2 = np.array([self.a_init, c2])
+
+            L2 = self.__cost(I2)
+            dL_dV_p_diff = (L2 - L1) / s
+
+
+            # compute gradient error
+            grad_err = np.abs( (dL_dV_p - dL_dV_p_diff) / dL_dV_p_diff )
+            
+            if verbose == 1:
+                print('step size=', s, ', example gradient finite difference error=', grad_err)
+
+            grad_errs.append(grad_err)
+
+
+        plt.loglog(step_sizes, grad_errs)
+        plt.title('Finite Difference Gradient Check for ' + title)
+        plt.xlabel('step size')
+        plt.ylabel('error')
