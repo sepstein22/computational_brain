@@ -115,6 +115,8 @@ After defining parameters, this file is broken down into a few major functoins:
   6. `optimize`: determines what type of problem we have and calls the sorrect `adj_` function
   7. `graph`: plots the optimal solution.
 
+### Tests
+
 
 ## Roadmap
 
