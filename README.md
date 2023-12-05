@@ -121,8 +121,16 @@ After defining parameters, this file is broken down into a few major functoins:
 ## Acknowledgments
 
 This uses the following open source packages: 
-
+- [NEURON](https://www.neuron.yale.edu/neuron/)
+- [Autograd](https://github.com/HIPS/autograd)
+  
 ## Requirements 
+
+Programming dependies specified in  `requirements.txt`  
+```sh
+   pip install -r requirements.txt
+   ```
+
 README contains Installation instructions
 README contains example usage and minimum working example
 
