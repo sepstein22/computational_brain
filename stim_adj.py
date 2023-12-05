@@ -37,7 +37,7 @@ class stim_adj:
         self.g_Na, self.g_K, self.g_L, self.E_Na, self.E_K, self.E_L, self.C_m, self.m, self.n, self.h = HH_params  
         self.a_init = guess_a
         self.c_init = guess_c
-        self.b_init = 152.525
+        self.b_init = 152.25
         
         #retrieved simulation parameter
         self.t_sim = np.arange(0, self.t_final, dt)
@@ -91,7 +91,7 @@ class stim_adj:
         return dVdt, dmdt, dhdt, dndt
     
     # Forward Euler to solve IVP
-    def integrate_HH(self, m, h, n, I_params):
+    def integrate_HH(self, I_params):
         '''forward euler method to solve Hodgkin Huxley
         
         Returns: 
@@ -100,6 +100,9 @@ class stim_adj:
         V_record = np.zeros_like(self.t_sim)
         V = self.V0
         
+        m = self.m
+        n = self.n
+        h = self.h
         
         for i in range(len(self.t_sim)):
             V_record[i] = V
@@ -110,13 +113,16 @@ class stim_adj:
             n += dndt * self.dt
         return V_record
     
-    def __cost(self, I_params, m, n, h): 
+    def __cost(self, I_params): 
         '''defines optimizaton problem, objective function sought to minimize'''
         cost = 0
         
         V_record = []
         V = self.V0
         
+        m = self.m
+        n = self.n
+        h = self.h
         
         for i in range(len(self.t_sim)):
         
@@ -156,23 +162,23 @@ class stim_adj:
         # start callback
         all_x_i = [self.I_params_init[0]]
         all_y_i = [self.I_params_init[1]]
-        all_f_i = [self.__cost(self.I_params_init, self.m, self.n, self.h)]
+        all_f_i = [self.__cost(self.I_params_init)]
         def store(X):
             x, y = X
             all_x_i.append(x)
             all_y_i.append(y)
-            all_f_i.append(self.__cost(X, self.m, self.n, self.h))
+            all_f_i.append(self.__cost(X))
         # end callback
             
         grad_AD = grad(self.__cost, 0)
         if self.bounds == []:
-            optim = optimize.minimize(self.__cost, self.I_params_init, args = (self.m, self.n, self.h), jac = grad_AD, method = self.method)
+            optim = optimize.minimize(self.__cost, self.I_params_init, args = (), jac = grad_AD, method = self.method)
         else: 
             #self.callback.iteration = 0
-            optim = optimize.minimize(self.__cost, self.I_params_init, args = (self.m, self.n, self.h), jac = grad_AD, bounds = self.bounds, callback = store, method = self.method) #options={'disp': True, 'maxiter':3})
+            optim = optimize.minimize(self.__cost, self.I_params_init, args = (), jac = grad_AD, bounds = self.bounds, callback = store, method = self.method) #options={'disp': True, 'maxiter':3})
         return optim
    
     def recovery(self):
         X = self.optimize().x
-        recovered = self.integrate_HH(self.m, self.h, self.n, X)
+        recovered = self.integrate_HH(X)
         return X, recovered
