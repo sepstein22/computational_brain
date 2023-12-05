@@ -100,7 +100,7 @@ There are four key files in this repo.
     - `method`: Specifies the optimization method that will be loaded into `stim_adj.py` or `param_adj.py`. 
     - `bounds`: Specifies a list of bounds. This will be updated for known values as well in the parameter optimization case. 
     - `tol`: Specifies the optimization tol to reduce runtime.
-    - 
+
 It is assumed the parameters are given to be of the following form `['g_Na', 'g_K', 'g_L', 'E_Na', 'E_K', 'E_L', 'C_m', 'm', 'h', 'n', 'stim']`. If the user includes `'stim'` as an unknown all other values are assumed to be known, since we do not allow for the combination of impulse and parameter recovery.
 
 After defining parameters, this file is broken down into a few major functoins: 
