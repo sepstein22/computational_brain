@@ -3,7 +3,7 @@ from autograd import grad
 from scipy import optimize
 
 class stim_adj: 
-    def __init__(self, V_data, t_data, dt, HH_params, guess_a, guess_c, guess_b, bounds = [], method =  'CG'):
+    def __init__(self, V_data, t_data, dt, HH_params, guess_a, guess_c, bounds = [], method =  'BFGS'):
         '''
         args:
             V0 (float): defined in upload.py to be initial voltage
@@ -37,13 +37,14 @@ class stim_adj:
         self.g_Na, self.g_K, self.g_L, self.E_Na, self.E_K, self.E_L, self.C_m, self.m, self.n, self.h = HH_params  
         self.a_init = guess_a
         self.c_init = guess_c
-        self.b_init = guess_b
+        self.b_init = 152.525
         
         #retrieved simulation parameter
         self.t_sim = np.arange(0, self.t_final, dt)
         
         #defining optimization parameters
-        self.I_params_init = np.array([guess_a, guess_c, guess_b])
+        self.I_params_init = np.array([guess_a, guess_c])
+        self.bounds = bounds
         self.method = method
 
         
@@ -82,7 +83,7 @@ class stim_adj:
         Returns: 
             dVdt, dmdt, dhdt, dndt (tuple: floats): rate of change for dynamical HH varianbles
         '''
-        I = I_params[0]*np.exp(-(t-I_params[2])**2/(2*I_params[1]**2))
+        I = I_params[0]*np.exp(-(t-self.b_init)**2/(2*I_params[1]**2))
         dVdt = (I - self.g_Na * m**3 * h * (V - self.E_Na) - self.g_K * n**4 * (V - self.E_K) - self.g_L * (V - self.E_L)) / self.C_m
         dmdt = self.alpha_m(V) * (1 - m) - self.beta_m(V) * m
         dhdt = self.alpha_h(V) * (1 - h) - self.beta_h(V) * h
@@ -102,7 +103,7 @@ class stim_adj:
         
         for i in range(len(self.t_sim)):
             V_record[i] = V
-            dVdt, dmdt, dhdt, dndt = self.__forward(self.I_params, V, m, n, h, self.t_sim[i])
+            dVdt, dmdt, dhdt, dndt = self.__forward(I_params, V, m, n, h, self.t_sim[i])
             V += dVdt * self.dt
             m += dmdt * self.dt
             h += dhdt * self.dt
@@ -136,16 +137,42 @@ class stim_adj:
         cost = cost/len(self.t_data)
 
         return cost 
+    
+#         # print out at every iteration
+#     def callback(self, x):
+#         error = self.__cost(x, self.m, self.n, self.h)
+#         print(f"Iteration: {self.callback.iteration}, x: {x}, Cost: {error}")
+#         self.callback.iteration += 1
+
+#     def callbackF(Xi):
+#         global Nfeval
+#         print '{0:4d}   {1: 3.6f}   {2: 3.6f}   {3: 3.6f}   {4: 3.6f}'.format(Nfeval, Xi[0], Xi[1], self.__cost(Xi, self.m, self.n, self.h))
+#         Nfeval += 1
+
 
     def optimize(self):
         '''impliments minimization problem with respect to desired parameters'''
+        
+        # start callback
+        all_x_i = [self.I_params_init[0]]
+        all_y_i = [self.I_params_init[1]]
+        all_f_i = [self.__cost(self.I_params_init, self.m, self.n, self.h)]
+        def store(X):
+            x, y = X
+            all_x_i.append(x)
+            all_y_i.append(y)
+            all_f_i.append(self.__cost(X, self.m, self.n, self.h))
+        # end callback
+            
         grad_AD = grad(self.__cost, 0)
-        if bounds == []:
+        if self.bounds == []:
             optim = optimize.minimize(self.__cost, self.I_params_init, args = (self.m, self.n, self.h), jac = grad_AD, method = self.method)
         else: 
-             optim = optimize.minimize(self.__cost, self.I_params_init, args = (self.m, self.n, self.h), jac = grad_AD, bounds = self.bounds, method = self.method)
+            #self.callback.iteration = 0
+            optim = optimize.minimize(self.__cost, self.I_params_init, args = (self.m, self.n, self.h), jac = grad_AD, bounds = self.bounds, callback = store, method = self.method) #options={'disp': True, 'maxiter':3})
         return optim
    
     def recovery(self):
-        recovered = self.integrate_HH(self.m, self.h, self.n, self.optimize().x)
-        return recovered
+        X = self.optimize().x
+        recovered = self.integrate_HH(self.m, self.h, self.n, X)
+        return X, recovered
