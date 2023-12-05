@@ -7,13 +7,26 @@ import numpy as np
 
 class retrieve_file:
     def __init__(self, neuron_type= 'L5PC', num_ap = 1, V_data = None, I_data = None, t_data = None ):
+        '''
+        defines the ground truth for the optimization problem
+        
+        Args: 
+            neuron_type (str): assume to be L5PC, HH, or manual otherwise raises an error
+            num_ap (int): desired number of action potentials
+            V_data (array): manually entered voltage time series
+            I_data (array): manually entered stimulaiton time series
+            t_data (array): manually entered time array
+        '''
         self.neuron = neuron_type
         self.num_ap = num_ap
         self.V_data  = V_data
         self.I_data = I_data
         self.t_data = t_data
-        
+       
     def load(self):
+        '''loads in file based on specified conditions due to naming framework and stores key global variables
+        
+        Returns: self.V_data, self.I_data, self.t_data, self.V0, self.dt, b (center) '''
         if self.neuron == 'L5PC':
             if self.num_ap >= 2:
                 warnings.warn("For multiple action potentials, defaulted to general repetitive firing")
