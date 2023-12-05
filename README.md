@@ -115,7 +115,10 @@ After defining parameters, this file is broken down into a few major functoins:
   7. `graph`: plots the optimal solution.
 
 ### Tests
-
+Prior to running the model we recommend the user runs some unit tests these include: 
+1. Insuring there are equal time steps and data.
+```assertEqual(len(self.V_data), len(self.t_data)) ```
+2. Finite Gradient check: 
 
 ## Acknowledgments
 
