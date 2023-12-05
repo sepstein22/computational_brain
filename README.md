@@ -133,4 +133,3 @@ Programming dependies specified in  `requirements.txt`
 README contains Installation instructions
 README contains example usage and minimum working example
 
-## Tests
