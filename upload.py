@@ -36,7 +36,7 @@ class retrieve_file:
             else:
                 print('Default chosen of 1 Action Potential')
                 fname = 'gt_1a'
-            with zipfile.ZipFile('./sim_data/' + fname + '.zip', 'r') as zip_ref:
+            with zipfile.ZipFile('../sim_data/' + fname + '.zip', 'r') as zip_ref:
                 zip_ref.extractall()
             with open(fname + '.csv') as csvfile:
                 df = pd.read_csv(csvfile)
@@ -59,7 +59,7 @@ class retrieve_file:
                 fname = 'hh_noap'
             else: 
                 fname = 'hh_1ap'
-            with zipfile.ZipFile('./sim_data/' + fname + '.zip', 'r') as zip_ref:
+            with zipfile.ZipFile('../sim_data/' + fname + '.zip', 'r') as zip_ref:
                 csv_file_name = zip_ref.namelist()[0]
                 with zip_ref.open(csv_file_name) as csv_file:
                     df = pd.read_csv(csv_file)
