@@ -97,15 +97,29 @@ Minimal working example and getting started:
    ```
 7. Visualize the results.  
 
-For more complex implimentations: 
+For more complex implimentations (we do not recommend currently doing this, as it has poor runtime performance and some intermittent convergence issues): 
 
 Follow steps 1-3: 
 
 4. Create an instance of the parent class:
    ```sh
+   from param_test import ParameterRecovery
+
+   inst = ParameterRecovery(known_parameters, unknown_parameters, dt, neuron_type, ...)
    ```
+5. Assign parameters:
+   ```sh
+   param_list = inst.assign_parameters()
+   bounds = inst.define_bounds()
+   init_guess = inst.def_guess_params()
+   ```
+6. Call optimizer:
+   ```sh
+   optim_sol = inst.optimize()
+   ```
+   
 ## Usage
-There are four key files in this repo. 
+There are four key files in this repo. In addition to the a minimal working case visual `stim_adj_test.ipynb`.
 
 - `upload.py`: loads data 
 - `stim_adj.py` : class to implement the forward model, cost method, adjoint method, and optimization when we are seeking to recover parameters of the Impulse wave {`a`: amplitude, `c`: frequency, `b`: center } assuming a guassian waveform
