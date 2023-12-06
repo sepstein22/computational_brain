@@ -30,7 +30,7 @@
 ### Background 
 
 
-This project is inspired by Boutet, A., Madhavan, R., Elias, G.J.B. et al. (2021), an investigation on finding optimal parameters for deep brain stimulation. This model is applicable to parameter recovery within the Hodgkin Huxley model. It is applicable to multiple forms of real world data, but has a preloaded L5PC neuron and redumentary Hodgkin Huxley Neuron. Given the project scope, the user can specify two main objectives: to recover the impulse used to stimulate the neuron or to recover the specific instance parameters of the Hodgkin Huxley. 
+This project is inspired by Boutet, A., Madhavan, R., Elias, G.J.B. et al. (2021), an investigation on finding optimal parameters for deep brain stimulation. This model is applicable to parameter recovery within the Hodgkin Huxley model.[^1] It is applicable to multiple forms of real world data, but has a preloaded L5PC neuron and redumentary Hodgkin Huxley Neuron. Given the project scope, the user can specify two main objectives: to recover the impulse used to stimulate the neuron or to recover the specific instance parameters of the Hodgkin Huxley. 
 
 [Slide Deck](https://docs.google.com/presentation/d/1vojyAhQ3gDEvKSWQOHHKD5J7I1TJQIwM2w5m3KD4NwA/edit?usp=sharing)
 
@@ -38,7 +38,7 @@ This project is inspired by Boutet, A., Madhavan, R., Elias, G.J.B. et al. (2021
 
 ![alt text](https://raw.githubusercontent.com/OpenSourceBrain/L5bPyrCellHayEtAl2011/master/neuroConstruct/images/large.png)
 
-A model of the L5PC neuron was adopted from  Hay, Etay, et al. (2011). Layer 5 (L5) neurons are the fundamental output layer of cortical structures and consist of 2/3 of the mammilian cortex. When characterizing behavior, neuroscientists largely attribute cognitive processings to occur in L5PC neurons. Our L5 consists of long-range projection pyramidal neurons signaling a columnar output to both cortical and extracortical regions of the brain. Recent literature, Moberg S, Takahashi N.  (2022), has suggested two subclasses of morphologically distinct L5 neurons exist. These differences cause subsequent distinct electrophysiological properties. However, traditionally, computational models of neurons neglect these distinguishers. This leads to the question, can one use simplified computational models such as the Hodgkin Huxley to recovor more complex behaviors of the L5PC neuron? If so, is this accurate; and is it possible to optimize the computational model of such a neuron to closely fit the desired result, while maintaining biological feasibility?
+A model of the L5PC neuron was adopted from  Hay, Etay, et al. (2011).[^2] Layer 5 (L5) neurons are the fundamental output layer of cortical structures and consist of 2/3 of the mammilian cortex. When characterizing behavior, neuroscientists largely attribute cognitive processings to occur in L5PC neurons. Our L5 consists of long-range projection pyramidal neurons signaling a columnar output to both cortical and extracortical regions of the brain. Recent literature, Moberg S, Takahashi N.  (2022), has suggested two subclasses of morphologically distinct L5 neurons exist. These differences cause subsequent distinct electrophysiological properties.[^3] However, traditionally, computational models of neurons neglect these distinguishers. This leads to the question, can one use simplified computational models such as the Hodgkin Huxley to recovor more complex behaviors of the L5PC neuron? If so, is this accurate; and is it possible to optimize the computational model of such a neuron to closely fit the desired result, while maintaining biological feasibility?
 
 #### Hodgkin Huxley Model
 <img src = "https://github.com/sepstein22/cphy_final/blob/6eb8953b2cbfe5648ce6cbb59094ba43e5a0c3a1/images/HH.png" width = "300" height = "200">
@@ -173,7 +173,6 @@ Programming dependies specified in  `requirements.txt`
 ```sh
    pip install -r requirements.txt
    ```
-
-README contains Installation instructions
-README contains example usage and minimum working example
-
+[^1]: Boutet A, Madhavan R, Elias GJB, Joel SE, Gramer R, Ranjan M, Paramanandam V, Xu D, Germann J, Loh A, Kalia SK, Hodaie M, Li B, Prasad S, Coblentz A, Munhoz RP, Ashe J, Kucharczyk W, Fasano A, Lozano AM. Predicting optimal deep brain stimulation parameters for Parkinson's disease using functional MRI and machine learning. Nat Commun. 2021 May 24;12(1):3043. doi: 10.1038/s41467-021-23311-9. PMID: 34031407; PMCID: PMC8144408.
+[^2]:Hay, Etay, et al. "Models of neocortical layer 5b pyramidal cells capturing a wide range of dendritic and perisomatic active properties." PLoS computational biology 7.7 (2011): e1002107.
+[^3]:Moberg S, Takahashi N. Neocortical layer 5 subclasses: From cellular properties to roles in behavior. Front Synaptic Neurosci. 2022 Oct 28;14:1006773. doi: 10.3389/fnsyn.2022.1006773. PMID: 36387773; PMCID: PMC9650089.
