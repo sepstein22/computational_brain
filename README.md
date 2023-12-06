@@ -143,12 +143,14 @@ After defining parameters, this file is broken down into a few major functoins:
   1. `assign_parameters` acts as a test funciton to warn the user what parameters remained undefined and will be assumed to be of the standard Hodgkin Huxley Model.
   2. `define_bounds`: defines upper and lower bounds for both problem types.
   3. `def_guess_params`: defines initial guesses based on known and unknown values.
-  4. `adj_impulse`: calls an instance of `stim_adj.py` and returns the final Voltage and the optimal value of the impulse parameters `[a, c, b]`.
+  4. `adj_impulse`: calls an instance of `stim_adj.py` and returns the final Voltage and the optimal value of the impulse parameters `[a, c]`.
   5. `adj_params`: calls an instance of `param_adj.py` and returns the integrated for final Voltage and the optimal value of the HH parameters.
   6. `optimize`: determines what type of problem we have and calls the sorrect `adj_` function
   7. `graph`: plots the optimal solution.
 
 The folder specified `rough_drafts` includes debugging processes, alternatively tested loss functions, as well as other test notebooks.
+
+
 ### Tests
 Prior to running the model we recommend the user runs some unit tests these include: 
 1. Insuring there are equal time steps and data.
