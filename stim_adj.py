@@ -149,8 +149,7 @@ class stim_adj:
         if self.bounds == []:
             optim = optimize.minimize(self.__cost, self.I_params_init, args = (), jac = grad_AD, method = self.method)
         else: 
-            #self.callback.iteration = 0
-            optim = optimize.minimize(self.__cost, self.I_params_init, args = (), jac = grad_AD, bounds = self.bounds, method = self.method) #options={'disp': True, 'maxiter':3})
+            optim = optimize.minimize(self.__cost, self.I_params_init, args = (), jac = grad_AD, bounds = self.bounds, method = self.method)
         return optim
    
     def recovery(self):
@@ -162,8 +161,6 @@ class stim_adj:
     
     
     def fd_check(self, param_idx, verbose):
-        #a, c, param_idx, V0, m, h, n, dt, t, data_steps, V_data):
-
         '''Make log-log plot of gradient finite difference error vs. step size
         Args: 
             param_idx (binary): 0 for FD check of gradient with respect to amplitude
@@ -192,7 +189,7 @@ class stim_adj:
 
         # compute gradient using autograd
         grad_AD = grad(self.__cost, 0)
-        g = grad_AD(I1)[param_idx]#, self.V0, self.m, self.h, self.n, self.dt, self.t_sim, self.t_data, self.V_data)[param_idx]
+        g = grad_AD(I1)[param_idx]
         dL_dV_p = np.dot(g, p)
 
         grad_errs = list()
@@ -215,7 +212,7 @@ class stim_adj:
             grad_err = np.abs( (dL_dV_p - dL_dV_p_diff) / dL_dV_p_diff )
             
             if verbose == 1:
-                print('step size=', s, ', example gradient finite difference error=', grad_err)
+                print('step size=', s, ', finite difference error=', grad_err)
 
             grad_errs.append(grad_err)
 
