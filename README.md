@@ -158,12 +158,12 @@ Follow steps 1-3:
 #### To impliment Neural Network method: 
    
 ## Usage
-There are four key files to run the adjoint method in this repo. See `stim_adj_test.ipynb` to work through an example on how to use the code to invert for an impulse stimulus.
+There are several key files to run the adjoint method in this repo. Please refer to **`.\adjoint\stim_adj_test.ipynb`** for a minimal use case.
 
 - `upload.py`: loads data 
-- `stim_adj.py` : class to implement the forward model, cost method, adjoint method, and optimization when we are seeking to recover parameters of the Impulse wave {`a`: amplitude, `c`: frequency, `b`: center } assuming a guassian waveform
-- `param_adj.py` : class to implement the forward model, cost method, adjoint method, and optimization when we are seeking to recover the parameters of the Hodgkin Huxley equation with a known impulse wave {`g_Na`: , `g_K`, `g_L`, `E_Na`, `E_K `, `E_L`, `C_m`, `m`, `n`, `h`}. It assumes all these values are unknown. If any of these values are loaded in as known in the `param_test` file (which will be explained below), it sets both the upper and lower bounds when implementing optimization equal to this value, as well as the initial guess. 
-- `param_test` : is the class the user interacts with. It calls the three files above. It takes in the following arguments: 
+- `.\adjoint\stim_adj.py` : class to implement the forward model, cost method, adjoint method, and optimization when we are seeking to recover parameters of the Impulse wave {`a`: amplitude, `c`: frequency, `b`: center } assuming a guassian waveform
+- `.\adjoint\param_adj.py` : class to implement the forward model, cost method, adjoint method, and optimization when we are seeking to recover the parameters of the Hodgkin Huxley equation with a known impulse wave {`g_Na`: , `g_K`, `g_L`, `E_Na`, `E_K `, `E_L`, `C_m`, `m`, `n`, `h`}. It assumes all these values are unknown. If any of these values are loaded in as known in the `param_test` file (which will be explained below), it sets both the upper and lower bounds when implementing optimization equal to this value, as well as the initial guess. 
+- `.\adjoint\param_test` : is the class the user interacts with. It calls the three files above. It takes in the following arguments: 
     - `known_params`: a dictionary of any known values in the problem.
     - `unknown_params`: a dictionary of all unknown values in the problem. 
     - `dt` : time step for simulation
