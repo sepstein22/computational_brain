@@ -59,6 +59,23 @@ While this project presents a fundamental assessment of this problem, further ex
 ### Prerequisites
 For proof of concept, we recommend looking at the JupyterNotebooks in `rough_drafts` and for sample implementation of a class `stim_adj_test.ipynb`. The class implementations have a more significant runtime due to variable storage and high runtime overhead. Additionally, a class implementation has high method lookup overhead and overhead due to accessing global variables. Future directions would implement further runtime analysis, and likely the reworking of classes into python scripts. We also recommend starting with `` for impulse recovery, due to the simpler code and faster runtime. 
 
+### Folder Structure
+## Folder Structure
+
+    .
+    ├── adjoint                      #All 
+    ├── development                  # All Api doc and gif files
+      ├── models
+      ├── tests
+      ├── runtime
+    ├── images                       # Electron JS app folder
+    ├── sim_data                  # Angular website folder
+    ├── .gitignore
+    ├── .gitlab-ci.yml
+    ├── CODE_OF_CONDUCT.md
+    ├── LICENSE
+    └── README.md
+
 
 
 ### Installation 
