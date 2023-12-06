@@ -22,7 +22,11 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <ul>
+        <li><a href="#tests">Tests</a></li>
+    </ul>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#requirements">Requirements</a></li>
   </ol>
 </details>
 
