@@ -62,7 +62,10 @@ While this project presents a fundamental assessment of this problem, further ex
 ## Getting Started 
 
 ### Prerequisites
-For proof of concept, we recommend looking at the JupyterNotebooks in `rough_drafts` and for sample implementation of a class `stim_adj_test.ipynb`. The class implementations have a more significant runtime due to variable storage and high runtime overhead. Additionally, a class implementation has high method lookup overhead and overhead due to accessing global variables. Future directions would implement further runtime analysis, and likely the reworking of classes into python scripts. We also recommend starting with `` for impulse recovery, due to the simpler code and faster runtime. 
+For proof of concept, we recommend looking at the JupyterNotebooks in `.\development\tests`. For sample implementation of an adjoint class refer to **`.\adjoint\stim_adj_test.ipynb`**. For sample neural network implimentation refer to **`.\neuralnet\NN-training-example.ipynb`** .  
+
+
+Note: The class implementations have a more significant runtime due to variable storage and high runtime overhead. Additionally, a class implementation has high method lookup overhead and overhead due to accessing global variables. Future directions would implement further runtime analysis, and likely the reworking of classes into python scripts.
 
 ### Folder Structure
 
@@ -158,7 +161,7 @@ Follow steps 1-3:
 #### To impliment Neural Network method: 
    
 ## Usage
-There are several key files to run the adjoint method in this repo. Please refer to **`.\adjoint\stim_adj_test.ipynb`** for a minimal use case.
+There are several key files to run the adjoint method in this repo. Please refer to **`.\adjoint\stim_adj_test.ipynb`** and **`.\neuralnet\NN-training-example.ipynb`** for a minimal use case.
 
 - `upload.py`: loads data 
 - `.\adjoint\stim_adj.py` : class to implement the forward model, cost method, adjoint method, and optimization when we are seeking to recover parameters of the Impulse wave {`a`: amplitude, `c`: frequency, `b`: center } assuming a guassian waveform
