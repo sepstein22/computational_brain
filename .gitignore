@@ -2,3 +2,7 @@
 .DS_Store
 __pycache__/*
 *.csv
+./development/.ipynb_checkpoints/*
+./development/loss_toy.ipynb
+./development/stim_adj.ipynb
+./development/param_test.ipynb
