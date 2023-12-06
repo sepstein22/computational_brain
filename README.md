@@ -42,7 +42,7 @@ A model of the L5PC neuron was adopted from  Hay, Etay, et al. (2011).[^2] Layer
 
 #### Hodgkin Huxley Model
 <img src = "https://github.com/sepstein22/cphy_final/blob/6eb8953b2cbfe5648ce6cbb59094ba43e5a0c3a1/images/HH.png" width = "300" height = "200">
-For implimentation, a Biophysical model (i.e., a Hodgkin-Huxley model) is used, based on: Izhikevich, Eugene M. Dynamical systems in neuroscience : the geometry of excitability and bursting. Cambridge, Mass. London: MIT Press, 2010, Chapter 8. The Hodgkin Huxley is a simplified conductance based model of a neuron's signal propagation. 
+For implimentation, a Biophysical model (i.e., a Hodgkin-Huxley model) is used, based on: Izhikevich, Eugene M. Dynamical systems in neuroscience.[^4] 
 
 
 #### The Adjoint Method
@@ -51,7 +51,7 @@ Define a nonlinear system $V(t+1) = \mathbf{F}(V(t))$ where $t \in [0, T]$ and o
 Note that on the equations of motion (i.e. when $V(t) = \mathbf{F}(V(t-1))$ ), derivatives of $\mathcal{L}$ are equal to derivates of $J$. Thus, by construction of the Lagrangian, $\frac{\partial \mathcal{L}}{\partial m}$ on the equations of motion occurs at the minima. In order to find the minima, we first compute gradients using autograd, an Automatic Differentiation python library, and then search for a minimum using scipy's optimization library. 
 
 ### Motivation
-While this project presents a fundamental assessment of this problem, further expansions could play critical roles in disease treatments, such as in dementia and epilepsy. 
+While this project presents a fundamental assessment of this problem, further expansions could play critical roles in disease treatments, such as in dementia and epilepsy.[^5, ^6] 
 
 
 ## Getting Started 
@@ -176,3 +176,6 @@ Programming dependies specified in  `requirements.txt`
 [^1]: Boutet A, Madhavan R, Elias GJB, Joel SE, Gramer R, Ranjan M, Paramanandam V, Xu D, Germann J, Loh A, Kalia SK, Hodaie M, Li B, Prasad S, Coblentz A, Munhoz RP, Ashe J, Kucharczyk W, Fasano A, Lozano AM. Predicting optimal deep brain stimulation parameters for Parkinson's disease using functional MRI and machine learning. Nat Commun. 2021 May 24;12(1):3043. doi: 10.1038/s41467-021-23311-9. PMID: 34031407; PMCID: PMC8144408.
 [^2]:Hay, Etay, et al. "Models of neocortical layer 5b pyramidal cells capturing a wide range of dendritic and perisomatic active properties." PLoS computational biology 7.7 (2011): e1002107.
 [^3]:Moberg S, Takahashi N. Neocortical layer 5 subclasses: From cellular properties to roles in behavior. Front Synaptic Neurosci. 2022 Oct 28;14:1006773. doi: 10.3389/fnsyn.2022.1006773. PMID: 36387773; PMCID: PMC9650089.
+[^4]: Izhikevich, E.M., 2007. Dynamical systems in neuroscience. MIT press. 
+[^5]:Luo, Y., Sun, Y., Tian, X., Zheng, X., Wang, X., Li, W., Wu, X., Shu, B. and Hou, W., 2021. Deep brain stimulation for Alzheimer's disease: stimulation parameters and potential mechanisms of action. Frontiers in aging neuroscience, 13, p.619543.
+[^6]:Lv, Q., Du, A., Wei, W., Li, Y., Liu, G. and Wang, X.P., 2018. Deep brain stimulation: a potential treatment for dementia in Alzheimer's disease (AD) and Parkinson's disease dementia (PDD). Frontiers in neuroscience, 12, p.360.
