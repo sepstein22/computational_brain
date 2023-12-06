@@ -17,6 +17,7 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#folder-structure">Folder Structure</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
@@ -60,7 +61,6 @@ While this project presents a fundamental assessment of this problem, further ex
 For proof of concept, we recommend looking at the JupyterNotebooks in `rough_drafts` and for sample implementation of a class `stim_adj_test.ipynb`. The class implementations have a more significant runtime due to variable storage and high runtime overhead. Additionally, a class implementation has high method lookup overhead and overhead due to accessing global variables. Future directions would implement further runtime analysis, and likely the reworking of classes into python scripts. We also recommend starting with `` for impulse recovery, due to the simpler code and faster runtime. 
 
 ### Folder Structure
-## Folder Structure
 
     .
     ├── adjoint                      # All Api for adjoint based parameter recovery
