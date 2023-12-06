@@ -148,6 +148,7 @@ After defining parameters, this file is broken down into a few major functoins:
   6. `optimize`: determines what type of problem we have and calls the sorrect `adj_` function
   7. `graph`: plots the optimal solution.
 
+The folder specified `rough_drafts` includes debugging processes, alternatively tested loss functions, as well as other test notebooks.
 ### Tests
 Prior to running the model we recommend the user runs some unit tests these include: 
 1. Insuring there are equal time steps and data.
