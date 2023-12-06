@@ -17,11 +17,16 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#folder-structure">Folder Structure</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <ul>
+        <li><a href="#tests">Tests</a></li>
+    </ul>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#requirements">Requirements</a></li>
   </ol>
 </details>
 
@@ -38,7 +43,7 @@ This project is inspired by Boutet, A., Madhavan, R., Elias, G.J.B. et al. (2021
 
 ![alt text](https://raw.githubusercontent.com/OpenSourceBrain/L5bPyrCellHayEtAl2011/master/neuroConstruct/images/large.png)
 
-A model of the L5PC neuron was adopted from  Hay, Etay, et al. (2011).[^2] Layer 5 (L5) neurons are the fundamental output layer of cortical structures and consist of 2/3 of the mammilian cortex. When characterizing behavior, neuroscientists largely attribute cognitive processings to occur in L5PC neurons. Our L5 consists of long-range projection pyramidal neurons signaling a columnar output to both cortical and extracortical regions of the brain. Recent literature, Moberg S, Takahashi N.  (2022), has suggested two subclasses of morphologically distinct L5 neurons exist. These differences cause subsequent distinct electrophysiological properties.[^3] However, traditionally, computational models of neurons neglect these distinguishers. This leads to the question, can one use simplified computational models such as the Hodgkin Huxley to recovor more complex behaviors of the L5PC neuron? If so, is this accurate; and is it possible to optimize the computational model of such a neuron to closely fit the desired result, while maintaining biological feasibility?
+A model of the L5PC neuron was adopted from  Hay, Etay, et al. (2011).[^2] [See Repo](https://github.com/OpenSourceBrain/L5bPyrCellHayEtAl2011/tree/master/NEURON) Layer 5 (L5) neurons are the fundamental output layer of cortical structures and consist of 2/3 of the mammilian cortex. When characterizing behavior, neuroscientists largely attribute cognitive processings to occur in L5PC neurons. Our L5 consists of long-range projection pyramidal neurons signaling a columnar output to both cortical and extracortical regions of the brain. Recent literature, Moberg S, Takahashi N.  (2022), has suggested two subclasses of morphologically distinct L5 neurons exist. These differences cause subsequent distinct electrophysiological properties.[^3] However, traditionally, computational models of neurons neglect these distinguishers. This leads to the question, can one use simplified computational models such as the Hodgkin Huxley to recovor more complex behaviors of the L5PC neuron? If so, is this accurate; and is it possible to optimize the computational model of such a neuron to closely fit the desired result, while maintaining biological feasibility?
 
 #### Hodgkin Huxley Model
 <img src = "https://github.com/sepstein22/cphy_final/blob/6eb8953b2cbfe5648ce6cbb59094ba43e5a0c3a1/images/HH.png" width = "300" height = "200">
@@ -47,7 +52,7 @@ For implementation, a Biophysical model (i.e., a Hodgkin-Huxley model) is used, 
 
 #### The Adjoint Method
 
-Define a nonlinear system $V(t+1) = \mathbf{F}(V(t))$ where $t \in [0, T]$ and operator $\mathbf{F}$ solves the Hodgkin-Huxley system of ODEs using the forward Euler method. We are interested in finding an optimal value of some uknown parameter $m$ that minimizes a cost function $J$. This optimization problem can be solved using the Lagrange multiplier technique. Let $\mu(t)$ be a Lagrange multiplier and define the Lagrangian as $$\mathcal{L} = J -  \sum_{k=1}^{T} \mu(k)[V(k) - \mathbf{F}(V(k-1)]$$
+Define a nonlinear system $V(t+1) = \mathbf{F}(V(t))$ where $t \in [0, T]$ and operator $\mathbf{F}$ solves the Hodgkin-Huxley system of ODEs using the forward Euler method. We are interested in finding an optimal value of some uknown parameter $m$ that minimizes a cost function $J$. This optimization problem can be solved using the Lagrange multiplier technique. Let $\mu(t)$ be a Lagrange multiplier and define the Lagrangian as $$\mathcal{L} = J -  \sum_{k=1}^{T} \mu(k)[V(k) - \mathbf{F}(V(k-1))]$$
 Note that on the equations of motion (i.e. when $V(t) = \mathbf{F}(V(t-1))$ ), derivatives of $\mathcal{L}$ are equal to derivates of $J$. Thus, by construction of the Lagrangian, $\frac{\partial \mathcal{L}}{\partial m}$ on the equations of motion occurs at the minima. In order to find the minima, we first compute gradients using autograd, an Automatic Differentiation python library, and then search for a minimum using scipy's optimization library. 
 
 ### Motivation
@@ -57,24 +62,34 @@ While this project presents a fundamental assessment of this problem, further ex
 ## Getting Started 
 
 ### Prerequisites
-For proof of concept, we recommend looking at the JupyterNotebooks in `rough_drafts` and for sample implementation of a class `stim_adj_test.ipynb`. The class implementations have a more significant runtime due to variable storage and high runtime overhead. Additionally, a class implementation has high method lookup overhead and overhead due to accessing global variables. Future directions would implement further runtime analysis, and likely the reworking of classes into python scripts. We also recommend starting with `` for impulse recovery, due to the simpler code and faster runtime. 
+For proof of concept, we recommend looking at the JupyterNotebooks in `.\development\tests`. For sample implementation of an adjoint class refer to **`.\adjoint\stim_adj_test.ipynb`**. For sample neural network implimentation refer to **`.\neuralnet\NN-training-example.ipynb`** .  
+
+
+Note: The class implementations have a more significant runtime due to variable storage and high runtime overhead. Additionally, a class implementation has high method lookup overhead and overhead due to accessing global variables. Future directions would implement further runtime analysis, and likely the reworking of classes into python scripts.
 
 ### Folder Structure
-## Folder Structure
 
     .
-    ├── adjoint                      #All 
-    ├── development                  # All Api doc and gif files
-      ├── models
+    ├── adjoint                      # All Api for adjoint based parameter recovery
+    ├── development                  # build folder
+      ├── models                     # All ipynb towards implimenting inverse problems
+      ├── tests                      # Test files -- samples
+      ├── runtime            
+    ├── images                       # res (static images)
+    ├── neuralnet                    # All Api for neural network based parameter recovery
+    ├── sim_data                     #src files
+      ├── HH_data                    
+      ├── models                     # neuronal type files
+      ├── mods                       # mod folders containing conductance mechanisms
+      ├── morphologies               # neuronal morphology designation
       ├── tests
-      ├── runtime
-    ├── images                       # Electron JS app folder
-    ├── sim_data                  # Angular website folder
+      ├── x86_64                     #executables (C) 
+    ├── .DS_Store
     ├── .gitignore
-    ├── .gitlab-ci.yml
-    ├── CODE_OF_CONDUCT.md
-    ├── LICENSE
-    └── README.md
+    ├── NEURON_inst.py               # NEURON dependencies
+    ├── README.md
+    ├── requirements.txt             # file dependencies
+    └── upload.py                    #API for file retrieval
 
 
 
@@ -84,19 +99,28 @@ Minimal working example and getting started:
 
 1. Clone the repo:
    ```sh
-   git clone [https://github.com/sepstein22/cphy_final.git]
+   git clone [git@github.com:sepstein22/computational_brain.git]
    ```
 2. Go into the Directory:
    ```sh
-   cd cphy_final
+   cd computational_brain
    ```
 3. Install Dependencies:
    ```sh
    pip install -r requirements.txt
    ```
+   
+#### To run adjoint methods:
+4. Go into Adjoint Directory; 
+  ```sh
+  cd adjoint
+  ```
 4. Create an instance of the file fetching class:
    ```sh
    python3
+   import sys
+   import os
+   sys.path.append('../')
    from stim_adj import stim_adj
    from upload import retrieve_file
    #neuron_type = , num_ap = 
@@ -133,14 +157,16 @@ Follow steps 1-3:
    ```sh
    optim_sol = inst.optimize()
    ```
+
+#### To impliment Neural Network method: 
    
 ## Usage
-There are four key files to run the adjoint method in this repo. See `stim_adj_test.ipynb` to work through an example on how to use the code to invert for an impulse stimulus.
+There are several key files to run the adjoint method in this repo. Please refer to **`.\adjoint\stim_adj_test.ipynb`** and **`.\neuralnet\NN-training-example.ipynb`** for a minimal use case.
 
 - `upload.py`: loads data 
-- `stim_adj.py` : class to implement the forward model, cost method, adjoint method, and optimization when we are seeking to recover parameters of the Impulse wave {`a`: amplitude, `c`: frequency, `b`: center } assuming a guassian waveform
-- `param_adj.py` : class to implement the forward model, cost method, adjoint method, and optimization when we are seeking to recover the parameters of the Hodgkin Huxley equation with a known impulse wave {`g_Na`: , `g_K`, `g_L`, `E_Na`, `E_K `, `E_L`, `C_m`, `m`, `n`, `h`}. It assumes all these values are unknown. If any of these values are loaded in as known in the `param_test` file (which will be explained below), it sets both the upper and lower bounds when implementing optimization equal to this value, as well as the initial guess. 
-- `param_test` : is the class the user interacts with. It calls the three files above. It takes in the following arguments: 
+- `.\adjoint\stim_adj.py` : class to implement the forward model, cost method, adjoint method, and optimization when we are seeking to recover parameters of the Impulse wave {`a`: amplitude, `c`: frequency, `b`: center } assuming a guassian waveform
+- `.\adjoint\param_adj.py` : class to implement the forward model, cost method, adjoint method, and optimization when we are seeking to recover the parameters of the Hodgkin Huxley equation with a known impulse wave {`g_Na`: , `g_K`, `g_L`, `E_Na`, `E_K `, `E_L`, `C_m`, `m`, `n`, `h`}. It assumes all these values are unknown. If any of these values are loaded in as known in the `param_test` file (which will be explained below), it sets both the upper and lower bounds when implementing optimization equal to this value, as well as the initial guess. 
+- `.\adjoint\param_test` : is the class the user interacts with. It calls the three files above. It takes in the following arguments: 
     - `known_params`: a dictionary of any known values in the problem.
     - `unknown_params`: a dictionary of all unknown values in the problem. 
     - `dt` : time step for simulation
