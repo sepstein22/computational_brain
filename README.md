@@ -92,19 +92,28 @@ Minimal working example and getting started:
 
 1. Clone the repo:
    ```sh
-   git clone [https://github.com/sepstein22/cphy_final.git]
+   git clone [git@github.com:sepstein22/computational_brain.git]
    ```
 2. Go into the Directory:
    ```sh
-   cd cphy_final
+   cd computational_brain
    ```
 3. Install Dependencies:
    ```sh
    pip install -r requirements.txt
    ```
+   
+#### To run adjoint methods:
+4. Go into Adjoint Directory; 
+  ```sh
+  cd adjoint
+  ```
 4. Create an instance of the file fetching class:
    ```sh
    python3
+   import sys
+   import os
+   sys.path.append('../')
    from stim_adj import stim_adj
    from upload import retrieve_file
    #neuron_type = , num_ap = 
@@ -141,6 +150,8 @@ Follow steps 1-3:
    ```sh
    optim_sol = inst.optimize()
    ```
+
+#### To impliment Neural Network method: 
    
 ## Usage
 There are four key files to run the adjoint method in this repo. See `stim_adj_test.ipynb` to work through an example on how to use the code to invert for an impulse stimulus.
