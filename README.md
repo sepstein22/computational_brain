@@ -38,7 +38,7 @@ This project is inspired by Boutet, A., Madhavan, R., Elias, G.J.B. et al. (2021
 
 ![alt text](https://raw.githubusercontent.com/OpenSourceBrain/L5bPyrCellHayEtAl2011/master/neuroConstruct/images/large.png)
 
-A model of the L5PC neuron was adopted from  Hay, Etay, et al. (2011).[^2] Layer 5 (L5) neurons are the fundamental output layer of cortical structures and consist of 2/3 of the mammilian cortex. When characterizing behavior, neuroscientists largely attribute cognitive processings to occur in L5PC neurons. Our L5 consists of long-range projection pyramidal neurons signaling a columnar output to both cortical and extracortical regions of the brain. Recent literature, Moberg S, Takahashi N.  (2022), has suggested two subclasses of morphologically distinct L5 neurons exist. These differences cause subsequent distinct electrophysiological properties.[^3] However, traditionally, computational models of neurons neglect these distinguishers. This leads to the question, can one use simplified computational models such as the Hodgkin Huxley to recovor more complex behaviors of the L5PC neuron? If so, is this accurate; and is it possible to optimize the computational model of such a neuron to closely fit the desired result, while maintaining biological feasibility?
+A model of the L5PC neuron was adopted from  Hay, Etay, et al. (2011).[^2] [See Repo](https://github.com/OpenSourceBrain/L5bPyrCellHayEtAl2011/tree/master/NEURON) Layer 5 (L5) neurons are the fundamental output layer of cortical structures and consist of 2/3 of the mammilian cortex. When characterizing behavior, neuroscientists largely attribute cognitive processings to occur in L5PC neurons. Our L5 consists of long-range projection pyramidal neurons signaling a columnar output to both cortical and extracortical regions of the brain. Recent literature, Moberg S, Takahashi N.  (2022), has suggested two subclasses of morphologically distinct L5 neurons exist. These differences cause subsequent distinct electrophysiological properties.[^3] However, traditionally, computational models of neurons neglect these distinguishers. This leads to the question, can one use simplified computational models such as the Hodgkin Huxley to recovor more complex behaviors of the L5PC neuron? If so, is this accurate; and is it possible to optimize the computational model of such a neuron to closely fit the desired result, while maintaining biological feasibility?
 
 #### Hodgkin Huxley Model
 <img src = "https://github.com/sepstein22/cphy_final/blob/6eb8953b2cbfe5648ce6cbb59094ba43e5a0c3a1/images/HH.png" width = "300" height = "200">
@@ -63,18 +63,26 @@ For proof of concept, we recommend looking at the JupyterNotebooks in `rough_dra
 ## Folder Structure
 
     .
-    ├── adjoint                      #All 
-    ├── development                  # All Api doc and gif files
-      ├── models
+    ├── adjoint                      # All Api for adjoint based parameter recovery
+    ├── development                  # build folder
+      ├── models                     # All ipynb towards implimenting inverse problems
+      ├── tests                      # Test files -- samples
+      ├── runtime            
+    ├── images                       # res (static images)
+    ├── neuralnet                    # All Api for neural network based parameter recovery
+    ├── sim_data                     #src files
+      ├── HH_data                    
+      ├── models                     # neuronal type files
+      ├── mods                       # mod folders containing conductance mechanisms
+      ├── morphologies               # neuronal morphology designation
       ├── tests
-      ├── runtime
-    ├── images                       # Electron JS app folder
-    ├── sim_data                  # Angular website folder
+      ├── x86_64                     #executables (C) 
+    ├── .DS_Store
     ├── .gitignore
-    ├── .gitlab-ci.yml
-    ├── CODE_OF_CONDUCT.md
-    ├── LICENSE
-    └── README.md
+    ├── NEURON_inst.py               # NEURON dependencies
+    ├── README.md
+    ├── requirements.txt             # file dependencies
+    └── upload.py                    #API for file retrieval
 
 
 
