@@ -64,6 +64,8 @@ For proof of concept, we recommend looking at the JupyterNotebooks in `rough_dra
 
 ### Installation 
 
+Minimal working example and getting started: 
+
 1. Clone the repo:
    ```sh
    git clone [https://github.com/sepstein22/cphy_final.git]
@@ -72,19 +74,36 @@ For proof of concept, we recommend looking at the JupyterNotebooks in `rough_dra
    ```sh
    cd cphy_final
    ```
-4. Install Dependencies:
+3. Install Dependencies:
    ```sh
    pip install -r requirements.txt
    ```
-3. Create an instance of the parent class:
+4. Create an instance of the file fetching class:
    ```sh
    python3
-   from param_test import ParameterRecovery
+   from stim_adj import stim_adj
+   from upload import retrieve_file
+   #neuron_type = , num_ap = 
+   inst_file = retrieve_file(neuron_type, num_ap)
    ```
-4. Call the method:
-   '''
-   '''
+5. Load the Data:
+   ```sh
+   V_data, I_data, t_data, V0, dt, b = inst_file.load()
+   ```
+6. Create an instance of the solver class:
+   ```sh
+   #HH_params = , guess_a = , guess_c =
+   I_params, V = instance.recovery()
+   ```
+7. Visualize the results.  
 
+For more complex implimentations: 
+
+Follow steps 1-3: 
+
+4. Create an instance of the parent class:
+   ```sh
+   ```
 ## Usage
 There are four key files in this repo. 
 
