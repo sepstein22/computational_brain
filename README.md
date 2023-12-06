@@ -42,7 +42,7 @@ A model of the L5PC neuron was adopted from  Hay, Etay, et al. (2011).[^2] Layer
 
 #### Hodgkin Huxley Model
 <img src = "https://github.com/sepstein22/cphy_final/blob/6eb8953b2cbfe5648ce6cbb59094ba43e5a0c3a1/images/HH.png" width = "300" height = "200">
-For implimentation, a Biophysical model (i.e., a Hodgkin-Huxley model) is used, based on: Izhikevich, Eugene M. Dynamical systems in neuroscience.[^4]
+For implementation, a Biophysical model (i.e., a Hodgkin-Huxley model) is used, based on: Izhikevich, Eugene M. Dynamical systems in neuroscience.[^4]
 
 
 #### The Adjoint Method
@@ -96,7 +96,7 @@ Minimal working example and getting started:
    ```
 7. Visualize the results.  
 
-For more complex implimentations (we do not recommend currently doing this, as it has poor runtime performance and some intermittent convergence issues): 
+For more complex implementations (we do not recommend currently doing this, as it has poor runtime performance and some intermittent convergence issues): 
 
 Follow steps 1-3: 
 
@@ -118,11 +118,11 @@ Follow steps 1-3:
    ```
    
 ## Usage
-There are four key files in this repo. In addition to the a minimal working case visual `stim_adj_test.ipynb`.
+There are four key files to run the adjoint method in this repo. See `stim_adj_test.ipynb` to work through an example on how to use the code to invert for an impulse stimulus.
 
 - `upload.py`: loads data 
 - `stim_adj.py` : class to implement the forward model, cost method, adjoint method, and optimization when we are seeking to recover parameters of the Impulse wave {`a`: amplitude, `c`: frequency, `b`: center } assuming a guassian waveform
-- `param_adj.py` : class to implement the adjoint method when forward model, cost method, adjoint method, and optimization when we are seeking to recover the parameters of the Hodgkin Huxley equation with a known impulse wave {`g_Na`: , `g_K`, `g_L`, `E_Na`, `E_K `, `E_L`, `C_m`, `m`, `n`, `h`}. It assumes all these values are unknown. If any of these values are loaded in as known in the `param_test` file (which will be explained below), it sets both the upper and lower bounds when implementing optimization equal to this value, as well as the initial guess. 
+- `param_adj.py` : class to implement the forward model, cost method, adjoint method, and optimization when we are seeking to recover the parameters of the Hodgkin Huxley equation with a known impulse wave {`g_Na`: , `g_K`, `g_L`, `E_Na`, `E_K `, `E_L`, `C_m`, `m`, `n`, `h`}. It assumes all these values are unknown. If any of these values are loaded in as known in the `param_test` file (which will be explained below), it sets both the upper and lower bounds when implementing optimization equal to this value, as well as the initial guess. 
 - `param_test` : is the class the user interacts with. It calls the three files above. It takes in the following arguments: 
     - `known_params`: a dictionary of any known values in the problem.
     - `unknown_params`: a dictionary of all unknown values in the problem. 
@@ -147,7 +147,7 @@ After defining parameters, this file is broken down into a few major functoins:
   6. `optimize`: determines what type of problem we have and calls the sorrect `adj_` function
   7. `graph`: plots the optimal solution.
 
-The folder specified `rough_drafts` includes debugging processes, alternatively tested loss functions, as well as other test notebooks.
+The folder specified `development` includes debugging processes, alternatively tested loss functions, as well as other test notebooks.
 
 
 ### Tests
