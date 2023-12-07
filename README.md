@@ -55,6 +55,14 @@ For implementation, a Biophysical model (i.e., a Hodgkin-Huxley model) is used, 
 Define a nonlinear system $V(t+1) = \mathbf{F}(V(t))$ where $t \in [0, T]$ and operator $\mathbf{F}$ solves the Hodgkin-Huxley system of ODEs using the forward Euler method. We are interested in finding an optimal value of some uknown parameter $m$ that minimizes a cost function $J$. This optimization problem can be solved using the Lagrange multiplier technique. Let $\mu(t)$ be a Lagrange multiplier and define the Lagrangian as $$\mathcal{L} = J -  \sum_{k=1}^{T} \mu(k)[V(k) - \mathbf{F}(V(k-1))]$$
 Note that on the equations of motion (i.e. when $V(t) = \mathbf{F}(V(t-1))$ ), derivatives of $\mathcal{L}$ are equal to derivates of $J$. Thus, by construction of the Lagrangian, $\frac{\partial \mathcal{L}}{\partial m}$ on the equations of motion occurs at the minima. In order to find the minima, we first compute gradients using autograd, an Automatic Differentiation python library, and then search for a minimum using scipy's optimization library. 
 
+#### Implementing a Neural Network 
+In general, neural networks are comprised of node layers containing an input layer, one or
+more hidden layers, and an output layer. Each node connects to those in the previous layer
+with an associated weight; calculations are performed between nodes that mimic that passing
+of signals from one biological neuron to another. Together, these hidden layers and nodes can
+be trained and their parameter’s adjusted to learn data: identify patterns, predict data, etc.
+
+
 ### Motivation
 While this project presents a fundamental assessment of this problem, further expansions could play critical roles in disease treatments, such as in dementia and epilepsy.[^5][^6] 
 
@@ -76,7 +84,7 @@ Note: The class implementations have a more significant runtime due to variable 
       ├── tests                      # Test files -- samples
       ├── runtime            
     ├── images                       # res (static images)
-    ├── neuralnet                    # All Api for neural network based parameter recovery
+    ├── neuralnet                    # All Api for neural network parameter recovery and waveform fitting
     ├── sim_data                     #src files
       ├── HH_data                    
       ├── models                     # neuronal type files
@@ -157,8 +165,8 @@ Follow steps 1-3:
    ```sh
    optim_sol = inst.optimize()
    ```
-
-#### To impliment Neural Network method: 
+#### To run neural net methods:
+   Please refer to section in usage. 
    
 ## Usage
 There are several key files to run the adjoint method in this repo. Please refer to **`.\adjoint\stim_adj_test.ipynb`** and **`.\neuralnet\NN-training-example.ipynb`** for a minimal use case.
@@ -192,6 +200,35 @@ After defining parameters, this file is broken down into a few major functoins:
 
 The folder specified `development` includes debugging processes, alternatively tested loss functions, as well as other test notebooks.
 
+- `.\neuralnet\NNengine.py`: classes that store hidden layer parameters and functions
+necessary to create/train a neural network.
+    - `Run_NN`: creates and runs a neural network, automatically forward and back
+propagating to adjust the network’s hyperparameters
+- `.\neuralnet\WaveformGenerator.py `: contains methods to create waveform data; methods used to
+fit neural network output (impulse input prediction) data to a waveform.
+- `.\NN-training-example.py`: guides users through simplest example of training a neural
+network, fitting its output to a waveform, and obtaining accuracy (mean squared error).  
+
+`.\NN-training-example.py` in summary works through: 
+  1. Import simulation data from the ‘sim_data’ folder
+  2. Rescale and normalize data for neural network stability
+  3. Initiate a Multilayer object (the highest level object that will be encoded with all
+the neural network’s parameters)
+  ```sh
+  NN = Multilayers(nin,nouts)
+  #nin (int): num of input data pts
+  #nouts of form [num_nodes1, num_nodes2,... num_nodesN, num_ouputs]; nout=[300, nin] (1 layer of 300 nodes and the same number of outputs as inputs)
+  ```
+  4. Calling `Run_NN` on multilayers object and simulation data to output prediction/estimation of input impulse data
+  5. Fit output data to different waveforms from `WaveformGenerator.py` to return best fit and accuracy metric.
+
+Making future predictions using a trained Neural Network requires calilng respective Multilayers objects on new impulse data: 
+```sh
+nn_object = Multilayer(nin, outs)
+nn_object(new_input, true_output_data)
+```
+
+Optimal neural netowrk implimentation requires training on diverse datasets and parameter/hyperparameter tuning ( `nout`: number of layers and nodes, `step_size`: defining step size for gradient descent, `iter_lim`: number forward and backpasses, `error_thresh`: limiting backpasses (preventing overfitting)).
 
 ### Tests
 Prior to running the model we recommend the user runs some unit tests these include: 
