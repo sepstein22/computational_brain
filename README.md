@@ -56,12 +56,10 @@ Define a nonlinear system $V(t+1) = \mathbf{F}(V(t))$ where $t \in [0, T]$ and o
 Note that on the equations of motion (i.e. when $V(t) = \mathbf{F}(V(t-1))$ ), derivatives of $\mathcal{L}$ are equal to derivates of $J$. Thus, by construction of the Lagrangian, $\frac{\partial \mathcal{L}}{\partial m}$ on the equations of motion occurs at the minima. In order to find the minima, we first compute gradients using autograd, an Automatic Differentiation python library, and then search for a minimum using scipy's optimization library. 
 
 #### Implementing a Neural Network 
-In general, neural networks are comprised of node layers containing an input layer, one or
-more hidden layers, and an output layer. Each node connects to those in the previous layer
-with an associated weight; calculations are performed between nodes that mimic that passing
-of signals from one biological neuron to another. Together, these hidden layers and nodes can
-be trained and their parameter’s adjusted to learn data: identify patterns, predict data, etc.
+In general, neural networks are comprised of node layers containing an input layer, one or more hidden layers, and an output layer. Each node connects to those in the previous layer with an associated weight; calculations are performed between nodes that mimic that passing of signals from one biological neuron to another. Together, these hidden layers and nodes can be trained and their parameter’s adjusted to learn data: identify patterns, predict data, etc.
+<img src = "https://github.com/sepstein22/computational_brain/blob/8ffaa107e9e05ac7d1e988d5abc3fc343a6402c8/images/NN.png" width = "300" height = "200" >
 
+For this application, the objective is to optimize a neural network to recover the amplitude and waveform of an impulse from neuronal voltage time series data given a known underlying dynamical system.
 
 ### Motivation
 While this project presents a fundamental assessment of this problem, further expansions could play critical roles in disease treatments, such as in dementia and epilepsy.[^5][^6] 
